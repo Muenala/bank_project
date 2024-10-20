@@ -1,0 +1,8 @@
+<div class="df-between full-width">
+    <span class="total-results">{{ totalResults }} Resultados</span>
+    <select [ngModel]="pageSize" (ngModelChange)="onPageSizeChange($event)" class="page-size-select">
+        @for (size of pageSizeOptions; track $index) {
+        <option  [value]="size">{{ size }}</option>
+        }
+    </select>
+</div>

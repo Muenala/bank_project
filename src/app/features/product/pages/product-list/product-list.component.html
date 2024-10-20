@@ -1,0 +1,10 @@
+<app-product-search (search)="applyFilter($event)"></app-product-search>
+<div class="card">
+    <app-product-table [products]="filteredProducts" [pageSize]="pageSize">
+    </app-product-table>
+
+    <app-product-pagination [totalResults]="totalResults" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (pageSizeChange)="onPageSizeChange($event)">
+    </app-product-pagination>
+
+</div>

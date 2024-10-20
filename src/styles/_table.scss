@@ -1,0 +1,37 @@
+table {
+    border-collapse: collapse;
+    width: 100%; 
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-color: $bp-primary-blue50;
+    border-bottom: 1px solid $bp-primary-blue50;
+    font-weight: 500;
+    color: $bp-grayScale400;
+
+
+}
+
+th {
+    background-color: $bp-secondary-darkGrayishBlue100;
+    color: #333;
+    font-weight: 700;
+    color: $bp-grayScale400;
+}
+
+td {
+    background-color: $bp-grayScaleWhite;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.product-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}

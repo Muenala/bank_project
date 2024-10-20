@@ -1,0 +1,12 @@
+@import 'colors';
+@import 'font';
+@import 'input';
+@import 'table';
+@import 'card';
+@import 'select';
+@import 'general';
+
+.navigate {
+    padding: 30px 70px;
+    background-color: $bp-secondary-darkGrayishBlue100;
+}
