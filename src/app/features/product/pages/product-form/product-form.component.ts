@@ -7,8 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DateValidators } from '../../validators/date.validate';
 import { AsyncID } from '../../validators/asyncID.validator';
 import { take } from 'rxjs';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { Product } from '../../models/product.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',

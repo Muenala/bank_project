@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseProductFormComponent } from '../../class/BaseProductFormComponent.class';
 import { BpInputComponent } from '../../../../shared/components/bp-input/bp-input.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, formatDate } from '@angular/common';
