@@ -1,10 +1,15 @@
 <div class="df-center">
     <div class="card">
-        <h1 class="title2">Formulario de registro</h1>
+        <div class="header">
+            <button class="back-button" (click)="goBack()" aria-label="Volver a la página anterior">
+                <span aria-hidden="true">&larr;</span> Volver
+            </button>
+            <h1 class="title2">Formulario de registro</h1>
+        </div>
         <hr>
-        <form class="form" [formGroup]="form" >
+        <form class="form" [formGroup]="form">
             <div class="df-between">
-                <app-bp-input class="full-width"  formControlName="id">
+                <app-bp-input class="full-width" formControlName="id">
                     <label bp-label>ID</label>
                 </app-bp-input>
                 <app-bp-input class="full-width" formControlName="name">
@@ -29,7 +34,8 @@
             </div>
             <div class="df-center">
                 <button class="button_cancel" (click)="restart()">Reiniciar</button>
-                <button class="button_primary" (click)="onSubmit()" [ngClass]="{'button_primary_disabled': form.invalid}">Enviar</button>
+                <button class="button_primary" (click)="onSubmit()"
+                    [ngClass]="{'button_primary_disabled': form.invalid}">Enviar</button>
             </div>
         </form>
     </div>

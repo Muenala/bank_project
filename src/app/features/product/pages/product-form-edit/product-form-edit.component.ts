@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CommonModule, formatDate } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from '../../services/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AsyncID } from '../../validators/asyncID.validator';
 import { DateValidators } from '../../validators/date.validate';
 import { Product } from '../../models/product.model';
@@ -23,7 +23,7 @@ import { take } from 'rxjs';
 export class ProductFormEditComponent implements OnInit {
   form: FormGroup;
   id: string = '';
-  constructor(private fb: FormBuilder, private readonly productService: ProductService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private readonly productService: ProductService, private route: ActivatedRoute, private router: Router) {
     this.id = this.route.snapshot.params['id'];
 
 
@@ -46,6 +46,9 @@ export class ProductFormEditComponent implements OnInit {
   }
   ngOnInit() {
     this.setDateRevisionForOneMoreYear();
+  }
+  goBack(): void {
+    this.router.navigate(['/']);
   }
 
   get valid() {

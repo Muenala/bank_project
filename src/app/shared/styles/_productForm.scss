@@ -1,7 +1,14 @@
 .card{
     width: 1000px;
 }
-
+.header{
+    position: relative;
+}
+.back-button{
+    position: absolute;
+    top:- 50%;
+    margin-left:80px ;
+}
 .title2{
     text-align: center;
 }

@@ -1,6 +1,11 @@
 <div class="df-center">
     <div class="card">
-        <h1 class="title2">Formulario de registro</h1>
+        <div class="header">
+            <button class="back-button" (click)="goBack()" aria-label="Volver a la página anterior">
+                <span aria-hidden="true">&larr;</span> Volver
+            </button>
+            <h1 class="title2">Formulario de registro</h1>
+        </div>      
         <hr>
         <form class="form" [formGroup]="form" >
             <div class="df-between">

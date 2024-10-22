@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DateValidators } from '../../validators/date.validate';
 import { AsyncID } from '../../validators/asyncID.validator';
 import { take } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Product } from '../../models/product.model';
 
 @Component({
@@ -20,7 +20,7 @@ import { Product } from '../../models/product.model';
 })
 export class ProductFormComponent implements OnInit {
   form: FormGroup;
-  constructor(private fb: FormBuilder, private readonly productService: ProductService) {
+  constructor(private fb: FormBuilder, private readonly productService: ProductService, private router: Router) {
 
     this.form = this.fb.group({
       id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)], [AsyncID(productService, false, "")]],
@@ -30,10 +30,14 @@ export class ProductFormComponent implements OnInit {
       date_release: [null, [Validators.required, DateValidators.minDate(new Date)]],
       date_revision: [null, [Validators.required]],
     });
-   
+
   }
   ngOnInit() {
     this.setDateRevisionForOneMoreYear();
+  }
+
+  goBack(): void {
+    this.router.navigate(['/']);
   }
 
   get valid() {
