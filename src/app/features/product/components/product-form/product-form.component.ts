@@ -1,30 +1,71 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BpInputComponent } from '../../../../shared/components/bp-input/bp-input.component';
-import {  FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, formatDate } from '@angular/common';
-import { AsyncID } from '../../validators/asyncId.validator';
 import { ProductService } from '../../services/product.service';
 import { HttpClientModule } from '@angular/common/http';
+import { DateValidators } from '../../validators/date.validate';
+import { AsyncID } from '../../validators/asyncID.validator';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-product-form',
   standalone: true,
-  imports: [BpInputComponent,FormsModule,ReactiveFormsModule, CommonModule,HttpClientModule],
+  imports: [BpInputComponent, FormsModule, ReactiveFormsModule, CommonModule, HttpClientModule],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss',
-  providers:[ProductService ]
+  providers: [ProductService]
 })
-export class ProductFormComponent {
+export class ProductFormComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private readonly   productService: ProductService) {
+  constructor(private fb: FormBuilder, private readonly productService: ProductService) {
     this.form = this.fb.group({
-      id: ['', [Validators.required,Validators.maxLength(3),Validators.maxLength(10)],[AsyncID(productService)]],
-      nombre: ['', [Validators.required]],
-      descripcion: ['', [Validators.required]],
+      id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)], [AsyncID(productService)]],
+      name: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)]],
+      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
       logo: ['', [Validators.required]],
-      fecha_liberacion: [null, [Validators.required]],
-      fecha_revision: [formatDate(new Date, 'yyyy-MM-dd', 'en'), [Validators.required]],
+      date_release: [null, [Validators.required, DateValidators.minDate(new Date)]],
+      date_revision: [null, [Validators.required]],
+    });
+  }
+  ngOnInit() {
+    this.setDateRevisionForOneMoreYear();
+  }
+
+  get invalid() {
+    return this.form.invalid;
+  }
+  onSubmit() {
+    this.validateAllForm(this.form);
+    if (!this.invalid) {
+      this.productService.createProduct(this.form.getRawValue()).subscribe({
+        next: () => {
+          alert("add")
+        } 
+      })
+    }
+  }
+  private validateAllForm(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+      control.updateValueAndValidity(); 
+      if (control.asyncValidator) {
+        control.statusChanges.pipe(
+          take(1)  
+        ).subscribe();
+      }
+    });
+      formGroup.updateValueAndValidity();
+  }
+  restart(){
+    this.form.reset();
+  }
+  setDateRevisionForOneMoreYear() {
+    this.form.get('date_release')?.valueChanges.subscribe(value => {
+      let newDate = new Date(new Date(value).setFullYear(new Date(value).getFullYear() + 1));
+      newDate.setDate(newDate.getDate() + 1);
+      this.form.get('date_revision')?.setValue(formatDate(newDate, 'yyyy-MM-dd', 'en'))
     });
   }
 }

@@ -18,8 +18,10 @@ export class ProductSearchComponent {
   ){
 
   }
-  onSearch(term: string): void {
-    this.search.emit(term);
+  onSearch(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchTerm = input.value;
+    this.search.emit(this.searchTerm);
   }
 
   addNewProduct(){

@@ -1,7 +1,7 @@
 <div class="search-container df-between">
     <input 
       type="text" 
-      [(ngModel)]="searchTerm" 
+      (input)="onSearch($event)"
       placeholder="Search..."
       class="search-input"
     >

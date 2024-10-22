@@ -4,7 +4,7 @@
     </app-product-table>
 
     <app-product-pagination [totalResults]="totalResults" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-        (pageSizeChange)="onPageSizeChange($event)">
+        (pageSizeChange)="onPageSizeChange($event)"  [pages]="pages"   (currentPageChange)="onCurrentPageChange($event)">
     </app-product-pagination>
 
 </div>

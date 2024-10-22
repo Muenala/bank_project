@@ -3,19 +3,26 @@
         <tr>
             <th>Logo</th>
             <th>Nombre del producto</th>
-            <th>Descripción <button (click)="information()" class="information"><app-icon-svg [href]="'icons/information.svg'" [width]="16" [height]="16"></app-icon-svg></button></th>
-            <th>Fecha de liberación <button (click)="information()" class="information"><app-icon-svg [href]="'icons/information.svg'" [width]="16" [height]="16"></app-icon-svg></button></th>
-            <th>Fecha de reestructuración <button (click)="information()" class="information"><app-icon-svg [href]="'icons/information.svg'" [width]="16" [height]="16"></app-icon-svg></button></th>
+            <th>Descripción <button (click)="information()" class="information"><app-icon-svg
+                        [href]="'icons/information.svg'" [width]="16" [height]="16"></app-icon-svg></button></th>
+            <th>Fecha de liberación <button (click)="information()" class="information"><app-icon-svg
+                        [href]="'icons/information.svg'" [width]="16" [height]="16"></app-icon-svg></button></th>
+            <th>Fecha de reestructuración <button (click)="information()" class="information"><app-icon-svg
+                        [href]="'icons/information.svg'" [width]="16" [height]="16"></app-icon-svg></button></th>
         </tr>
     </thead>
     <tbody>
         @for (product of products; track $index) {
-        <tr >
+
+        <tr>
             <td><img [src]="product.logo" [alt]="product.name" class="product-logo"></td>
             <td>{{ product.name }}</td>
-            <td>{{ product.description }}  </td>
+            <td>{{ product.description }} </td>
             <td>{{ product.date_release | date:'dd/MM/yyyy' }}</td>
             <td>{{ product.date_revision | date:'dd/MM/yyyy' }}</td>
+            <td class="actions-column">
+                <app-dropdown (click)="selectIdentify(product.id)" [idProduct]="product.id" [listActions]="listActions"  [identify]="identify"></app-dropdown>
+            </td>
         </tr>
         }
     </tbody>

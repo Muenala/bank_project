@@ -1,5 +1,21 @@
 <div class="df-between full-width">
     <span class="total-results">{{ totalResults }} Resultados</span>
+    <div class="pagination-controls">
+        <button 
+          (click)="previousPage()" 
+          [disabled]="currentPage === 1"
+          class="pagination-btn"
+        >
+          &lt;
+        </button>
+        <span class="page-info">{{ currentPage }} of {{ pages }}</span>
+        <button 
+          (click)="nextPage()" 
+          [disabled]="currentPage === pages"
+          class="pagination-btn"
+        >
+          &gt;
+        </button>
     <select [ngModel]="pageSize" (ngModelChange)="onPageSizeChange($event)" class="page-size-select">
         @for (size of pageSizeOptions; track $index) {
         <option  [value]="size">{{ size }}</option>

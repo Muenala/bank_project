@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ContentChild, ElementRef, Input, Optional, Self } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { VALIDATION_MESSAGES } from '../../../features/product/constants/validation-messages';
 
 @Component({
   selector: 'app-bp-input',
@@ -17,15 +18,19 @@ export class BpInputComponent implements ControlValueAccessor {
 
   value: string = '';
   isTouched: boolean = false;
-
+  date = new Date()
   constructor(@Optional() @Self() public ngControl: NgControl) {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
     }
   }
-
-  onChange = (value: string) => {};
-  onTouched = () => {};
+  get minDate(): string {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return yesterday.toISOString().split('T')[0];
+  }
+  onChange = (value: string) => { };
+  onTouched = () => { };
 
   writeValue(value: string): void {
     this.value = value;
@@ -57,8 +62,19 @@ export class BpInputComponent implements ControlValueAccessor {
   get errorMessage(): string {
     const errors = this.ngControl?.errors;
     if (errors) {
-      if (errors['required']) return 'Este campo es requerido';
-      if (errors['email']) return 'Ingrese un email válido';
+      const errorKey = Object.keys(errors)[0] as keyof typeof VALIDATION_MESSAGES;
+      if (VALIDATION_MESSAGES[errorKey]) {
+        let message = VALIDATION_MESSAGES[errorKey];
+        
+        if (typeof errors[errorKey] === 'object') {
+          const params = errors[errorKey] as Record<string, string>;
+          Object.keys(params).forEach(key => {
+            message = message.replace(`{${key}}`, params[key]);
+          });
+        }
+        
+        return message;
+      }
     }
     return '';
   }

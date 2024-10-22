@@ -3,7 +3,7 @@
   <label class="title" [ngClass]="{'disabled-text':disabled}">
     <ng-content  select="[bp-label]"></ng-content>
   </label>
-  <input [type]="type" [placeholder]="placeholder" [value]="value" [disabled]="disabled" [ngClass]="{'disabled-input':disabled}"
+  <input [min]="minDate" [type]="type" [placeholder]="placeholder" [value]="value" [disabled]="disabled" [ngClass]="{'disabled-input':disabled}"
     (input)="onInputChange($event)" (blur)="onBlur()">
   @if (isInvalid) {
   <div class="error-message">

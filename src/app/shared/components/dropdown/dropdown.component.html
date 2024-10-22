@@ -1,0 +1,14 @@
+<div class="dropdown">
+    <button class="dropdown-toggle" (click)="toggleDropdown()">
+        ⋮
+    </button>
+    @if(activeDropdown && idProduct == identify){
+    <div class="dropdown-menu">
+        @for (action of listActions; track $index) {
+        <button (click)="action.action(idProduct)" class="dropdown-item">
+            {{action.name}}
+        </button>
+        }
+    </div>
+    }
+</div>

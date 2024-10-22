@@ -20,6 +20,8 @@ export class ProductListComponent implements OnInit {
   filteredProducts: Product[] = [];
   searchTerm: string = '';
   pageSize: number = 5;
+  currentPage: number = 1;
+  pages: number = 0;
   pageSizeOptions: number[] = [5, 10, 20];
   totalResults: number = 0;
 
@@ -31,23 +33,33 @@ export class ProductListComponent implements OnInit {
 
   loadProducts(): void {
     this.productService.getProducts().subscribe({
-      next: (data) => {
-        this.products = data;
+      next: (response) => {
+        this.products = response.data;
+        this.applyFilter(this.searchTerm)
       },
       error: (error) => console.error('Error fetching products', error)
     });
   }
 
   applyFilter(term: string): void {
+    this.searchTerm = term
+    let page = (this.currentPage-1)*this.pageSize;
     this.filteredProducts = this.products.filter(product =>
       product.name.toLowerCase().includes(term.toLowerCase())
-    );
+    ).slice(page,page+this.pageSize);
     this.totalResults = this.filteredProducts.length;
+    this.pages = Math.ceil(this.products.length / this.pageSize);
   }
 
 
 
   onPageSizeChange(size: number): void {
     this.pageSize = size;
+    this.applyFilter(this.searchTerm);
+  }
+
+  onCurrentPageChange(currentPage: number): void {
+    this.currentPage = currentPage;
+    this.applyFilter(this.searchTerm);
   }
 }
