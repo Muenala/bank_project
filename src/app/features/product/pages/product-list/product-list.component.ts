@@ -37,15 +37,12 @@ export class ProductListComponent implements OnInit {
         this.products = response.data;
         this.applyFilter(this.searchTerm)
       },
-      error: (error) => console.error('Error fetching products', error)
     });
   }
 
   applyFilter(term: string): void {
     this.searchTerm = term
     let page = (this.currentPage-1)*this.pageSize;
-    console.log(this.products);
-    
     this.filteredProducts = this.products.filter(product =>
       product.name.toLowerCase().includes(this.searchTerm .toLowerCase())
     ).slice(page,page+this.pageSize);

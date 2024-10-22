@@ -1,0 +1,18 @@
+
+<div class="container-modal" (click)="closeModal()">
+    <div class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                
+                <div class="modal-body">
+                    <p>¿Estás seguro de eliminar el producto {{product.name}}?</p>
+                </div>
+
+                <div class="modal-actions df-center">
+                    <button type="button" class="button_cancel" (click)="closeModal()">Cancelar</button>
+                    <button type="button" class="button_primary" (click)="deleteProduct()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

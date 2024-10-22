@@ -1,0 +1,28 @@
+.container-modal{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.105);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    .modal {
+        border-radius: 4px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: rgb(249, 249, 249);
+        .modal-body{
+            border-top: 1px;
+            border-color: black;
+            padding: 30px 20px 70px 30px;
+        }
+        .modal-actions{
+            border-top: 2px solid $bp-gray-white2;
+        }
+        
+      }
+      
+   
+}

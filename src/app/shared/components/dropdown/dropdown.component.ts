@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { DropdownAction } from '../../models/dropdownAction.model';
+import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-dropdown',
   standalone: true,
-  imports: [],
+  imports: [DeleteModalComponent],
   templateUrl: './dropdown.component.html',
   styleUrl: './dropdown.component.scss'
 })

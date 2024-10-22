@@ -4,7 +4,7 @@
         <hr>
         <form class="form" [formGroup]="form" >
             <div class="df-between">
-                <app-bp-input class="full-width" [disabled]="isEditMode" formControlName="id">
+                <app-bp-input class="full-width" [disabled]="true" formControlName="id">
                     <label bp-label>ID</label>
                 </app-bp-input>
                 <app-bp-input class="full-width" formControlName="name">
@@ -29,7 +29,7 @@
             </div>
             <div class="df-center">
                 <button class="button_cancel" (click)="restart()">Reiniciar</button>
-                <button class="button_primary" (click)="onSubmit()" [ngClass]="{'button_primary_disabled': !valid}">Enviar</button>
+                <button class="button_primary" (click)="onSubmit()" [ngClass]="{'button_primary_disabled': form.invalid}">Enviar</button>
             </div>
         </form>
     </div>

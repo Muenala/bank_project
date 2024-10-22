@@ -20,29 +20,17 @@ import { Product } from '../../models/product.model';
 })
 export class ProductFormComponent implements OnInit {
   form: FormGroup;
-  isEditMode: boolean = false;
-  id: string = '';
-  constructor(private fb: FormBuilder, private readonly productService: ProductService, private route: ActivatedRoute) {
-    this.id = this.route.snapshot.params['id'];
-    this.isEditMode = !!this.id;
-
+  constructor(private fb: FormBuilder, private readonly productService: ProductService) {
 
     this.form = this.fb.group({
-      id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)], [AsyncID(productService, this.isEditMode,   this.id )]],
+      id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)], [AsyncID(productService, false, "")]],
       name: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
       logo: ['', [Validators.required]],
       date_release: [null, [Validators.required, DateValidators.minDate(new Date)]],
       date_revision: [null, [Validators.required]],
     });
-    if (this.isEditMode) {
-      this.productService.getProduct(this.id).subscribe({
-        next: (product: Product) => {
-          this.form.patchValue(product);
-        }
-      })
-      this.form.get("id")?.disable();
-    }
+   
   }
   ngOnInit() {
     this.setDateRevisionForOneMoreYear();
@@ -52,16 +40,15 @@ export class ProductFormComponent implements OnInit {
     return this.form.valid;
   }
   onSubmit() {
-    this.validateAllForm(this.form);
-    console.log(this.valid);
-    
     if (this.valid) {
-      const service = this.isEditMode ? this.productService.updateProduct(this.id, this.form.getRawValue()) : this.productService.createProduct(this.form.getRawValue());
-      service.subscribe({
+      this.productService.createProduct(this.form.getRawValue()).subscribe({
         next: () => {
-          alert("add")
+          this.validateAllForm(this.form);
         }
       })
+    } else {
+      this.validateAllForm(this.form);
+
     }
   }
   private validateAllForm(formGroup: FormGroup) {
@@ -78,8 +65,6 @@ export class ProductFormComponent implements OnInit {
   }
   restart() {
     this.form.reset();
-    if (this.isEditMode)
-      this.form.get("id")?.setValue(this.id)
   }
   setDateRevisionForOneMoreYear() {
     this.form.get('date_release')?.valueChanges.subscribe(value => {

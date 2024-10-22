@@ -1,5 +1,5 @@
 import { AbstractControl, AsyncValidatorFn } from "@angular/forms";
-import { map, switchMap, timer } from "rxjs";
+import { catchError, map, of, switchMap, timer } from "rxjs";
 import { ProductService } from "../services/product.service";
 
 export function AsyncID(
@@ -11,7 +11,7 @@ export function AsyncID(
         return timer(500).pipe(
             switchMap(() =>
                 productService.getProduct(control.value).pipe(
-                    map(isTaken => ( !isEditMode?(isTaken ? { "uniqueId": true } : null):isTaken.id!=id? { "uniqueId": true } : null)))
-            ))
+                    map(isTaken => ( isEditMode?(isTaken ? { "uniqueId": true } : null):isTaken.id!=id? { "uniqueId": true } : null)))
+            ),    catchError(() => of(null)))
     };
 }
