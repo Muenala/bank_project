@@ -1,0 +1,31 @@
+.card{
+    width: 1000px;
+}
+
+.title2{
+    text-align: center;
+}
+
+.form{
+    padding: 0 40px;
+}
+button{
+    margin: 50px;
+}
+
+@media screen and (max-width: 850px) {
+    h1{
+        padding: 0 50px;
+    }
+    .card {
+        width: auto;
+        padding: 20px;
+    }
+    .form {
+        width: auto;
+    }
+    .df-between{
+        padding: 0 20px;
+        flex-direction: column;
+    }
+}

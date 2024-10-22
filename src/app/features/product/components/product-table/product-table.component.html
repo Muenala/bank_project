@@ -15,11 +15,11 @@
         @for (product of products; track $index) {
 
         <tr>
-            <td><img [src]="product.logo" [alt]="product.name" class="product-logo"></td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.description }} </td>
-            <td>{{ product.date_release | date:'dd/MM/yyyy' }}</td>
-            <td>{{ product.date_revision | date:'dd/MM/yyyy' }}</td>
+            <td data-label="Logo"><img [src]="product.logo" [alt]="product.name" class="product-logo"></td>
+            <td data-label="Nombre del producto">{{ product.name }}</td>
+            <td data-label="Descripción">{{ product.description }} </td>
+            <td data-label="Fecha de liberación">{{ product.date_release | date:'dd/MM/yyyy' }}</td>
+            <td data-label="Fecha de reestructuración">{{ product.date_revision | date:'dd/MM/yyyy' }}</td>
             <td class="actions-column">
                 <app-dropdown (click)="selectIdentify(product.id)" [idProduct]="product.id" [listActions]="listActions"
                     [identify]="identify"></app-dropdown>
