@@ -44,8 +44,10 @@ export class ProductListComponent implements OnInit {
   applyFilter(term: string): void {
     this.searchTerm = term
     let page = (this.currentPage-1)*this.pageSize;
+    console.log(this.products);
+    
     this.filteredProducts = this.products.filter(product =>
-      product.name.toLowerCase().includes(term.toLowerCase())
+      product.name.toLowerCase().includes(this.searchTerm .toLowerCase())
     ).slice(page,page+this.pageSize);
     this.totalResults = this.filteredProducts.length;
     this.pages = Math.ceil(this.products.length / this.pageSize);

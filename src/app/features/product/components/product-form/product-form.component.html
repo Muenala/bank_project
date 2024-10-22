@@ -2,34 +2,34 @@
     <div class="card">
         <h1 class="title2">Formulario de registro</h1>
         <hr>
-        <form class="form" [formGroup]="form" (submit)="onSubmit()">
+        <form class="form" [formGroup]="form" >
             <div class="df-between">
-                <app-bp-input class="full-width" formControlName="id" >
+                <app-bp-input class="full-width" [disabled]="isEditMode" formControlName="id">
                     <label bp-label>ID</label>
                 </app-bp-input>
-                <app-bp-input class="full-width" formControlName="name" >
+                <app-bp-input class="full-width" formControlName="name">
                     <label bp-label>Nombre</label>
                 </app-bp-input>
             </div>
             <div class="df-between">
-                <app-bp-input class="full-width" formControlName="description" >
+                <app-bp-input class="full-width" formControlName="description">
                     <label bp-label>Descripción</label>
                 </app-bp-input>
-                <app-bp-input class="full-width" formControlName="logo" >
+                <app-bp-input class="full-width" formControlName="logo">
                     <label bp-label>Logo</label>
                 </app-bp-input>
             </div>
             <div class="df-between">
-                <app-bp-input class="full-width" [type]="'date'" formControlName="date_release" >
+                <app-bp-input class="full-width" [type]="'date'" formControlName="date_release">
                     <label bp-label>Fecha Liberación</label>
                 </app-bp-input>
-                <app-bp-input class="full-width"  [type]="'date'" [disabled]="true" formControlName="date_revision" >
+                <app-bp-input class="full-width" [type]="'date'" [disabled]="true" formControlName="date_revision">
                     <label bp-label>Fecha Revisión</label>
                 </app-bp-input>
             </div>
             <div class="df-center">
                 <button class="button_cancel" (click)="restart()">Reiniciar</button>
-                <button class="button_primary  " [ngClass]="{'button_primary_disabled': invalid}">Enviar</button>
+                <button class="button_primary" (click)="onSubmit()" [ngClass]="{'button_primary_disabled': !valid}">Enviar</button>
             </div>
         </form>
     </div>

@@ -12,6 +12,10 @@ const routes: Routes = [
       path: 'nuevo',
       component: ProductComponent
     },
+    {
+      path: 'editar/:id',
+      component: ProductComponent
+    },
 ];
 
 @NgModule({

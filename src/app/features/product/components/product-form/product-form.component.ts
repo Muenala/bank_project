@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { DateValidators } from '../../validators/date.validate';
 import { AsyncID } from '../../validators/asyncID.validator';
 import { take } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-product-form',
@@ -18,48 +20,66 @@ import { take } from 'rxjs';
 })
 export class ProductFormComponent implements OnInit {
   form: FormGroup;
+  isEditMode: boolean = false;
+  id: string = '';
+  constructor(private fb: FormBuilder, private readonly productService: ProductService, private route: ActivatedRoute) {
+    this.id = this.route.snapshot.params['id'];
+    this.isEditMode = !!this.id;
 
-  constructor(private fb: FormBuilder, private readonly productService: ProductService) {
+
     this.form = this.fb.group({
-      id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)], [AsyncID(productService)]],
+      id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)], [AsyncID(productService, this.isEditMode,   this.id )]],
       name: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
       logo: ['', [Validators.required]],
       date_release: [null, [Validators.required, DateValidators.minDate(new Date)]],
       date_revision: [null, [Validators.required]],
     });
+    if (this.isEditMode) {
+      this.productService.getProduct(this.id).subscribe({
+        next: (product: Product) => {
+          this.form.patchValue(product);
+        }
+      })
+      this.form.get("id")?.disable();
+    }
   }
   ngOnInit() {
     this.setDateRevisionForOneMoreYear();
   }
 
-  get invalid() {
-    return this.form.invalid;
+  get valid() {
+    return this.form.valid;
   }
   onSubmit() {
     this.validateAllForm(this.form);
-    if (!this.invalid) {
-      this.productService.createProduct(this.form.getRawValue()).subscribe({
+    console.log(this.valid);
+    
+    if (this.valid) {
+      const service = this.isEditMode ? this.productService.updateProduct(this.id, this.form.getRawValue()) : this.productService.createProduct(this.form.getRawValue());
+      service.subscribe({
         next: () => {
           alert("add")
-        } 
+        }
       })
     }
   }
   private validateAllForm(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
       control.markAsTouched();
-      control.updateValueAndValidity(); 
+      control.updateValueAndValidity();
       if (control.asyncValidator) {
         control.statusChanges.pipe(
-          take(1)  
+          take(1)
         ).subscribe();
       }
     });
-      formGroup.updateValueAndValidity();
+    formGroup.updateValueAndValidity();
   }
-  restart(){
+  restart() {
     this.form.reset();
+    if (this.isEditMode)
+      this.form.get("id")?.setValue(this.id)
   }
   setDateRevisionForOneMoreYear() {
     this.form.get('date_release')?.valueChanges.subscribe(value => {
