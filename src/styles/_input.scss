@@ -2,6 +2,13 @@ input{
     border-radius: 10px;
     height: 50px;
     padding-left: 20px;
-    border: 2px solid $bp-primary-blue2;
+    border: 2px solid $bp-primary-blue;
     background-color: $bp-white;
+    @include font(type-scale(0), $font-weight-medium);
+}
+
+.disabled-input{
+    background-color: $bp-gray-white;
+    color: $bp-gray;
+    border: 2px solid $bp-gray;
 }

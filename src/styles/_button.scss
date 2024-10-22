@@ -10,9 +10,12 @@ button {
     padding: 20px 30px;
     background-color: $bp-primary-yellow;
 }
+.button_primary_disabled {
+    background-color: $bp-primary-yellow2;
+    color: $bp-primary-blue2;
+}
 
 .button_cancel {
     padding: 20px 30px;
     background-color: $bp-gray-white2;
-
 }

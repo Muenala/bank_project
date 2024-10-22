@@ -4,28 +4,32 @@
         <hr>
         <form class="form" [formGroup]="form">
             <div class="df-between">
-                <app-bp-input class="full-width" formControlName="id" placeholder="ID">
+                <app-bp-input class="full-width" formControlName="id" >
                     <label bp-label>ID</label>
                 </app-bp-input>
-                <app-bp-input  class="full-width" formControlName="nombre" placeholder="Tarjeta Crédito">
+                <app-bp-input class="full-width" formControlName="nombre" >
                     <label bp-label>Nombre</label>
                 </app-bp-input>
             </div>
             <div class="df-between">
-                <app-bp-input class="full-width" formControlName="descripcion" placeholder="Descripción">
+                <app-bp-input class="full-width" formControlName="descripcion" >
                     <label bp-label>Descripción</label>
                 </app-bp-input>
-                <app-bp-input  class="full-width" formControlName="logo" placeholder="Logo">
+                <app-bp-input class="full-width" formControlName="logo" >
                     <label bp-label>Logo</label>
                 </app-bp-input>
             </div>
             <div class="df-between">
-                <app-bp-input class="full-width" formControlName="fecha_liberacion" placeholder="Fecha Liberación">
+                <app-bp-input class="full-width" [type]="'date'" formControlName="fecha_liberacion" >
                     <label bp-label>Fecha Liberación</label>
                 </app-bp-input>
-                <app-bp-input  class="full-width" formControlName="fecha_revision" placeholder="Fecha Revisión">
+                <app-bp-input class="full-width"  [type]="'date'" [disabled]="true" formControlName="fecha_revision" >
                     <label bp-label>Fecha Revisión</label>
                 </app-bp-input>
+            </div>
+            <div class="df-center">
+                <button class="button_cancel">Reiniciar</button>
+                <button class="button_primary  " [ngClass]="{'button_primary_disabled': true}">Enviar</button>
             </div>
         </form>
     </div>

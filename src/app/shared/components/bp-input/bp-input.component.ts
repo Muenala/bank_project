@@ -11,10 +11,11 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 })
 export class BpInputComponent implements ControlValueAccessor {
   @Input() placeholder: string = '';
+  @Input() disabled: boolean = false;
+  @Input() type: string = 'text';
   @ContentChild('bp-label') labelRef!: ElementRef;
 
   value: string = '';
-  isDisabled: boolean = false;
   isTouched: boolean = false;
 
   constructor(@Optional() @Self() public ngControl: NgControl) {
@@ -36,10 +37,6 @@ export class BpInputComponent implements ControlValueAccessor {
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
   }
 
   onInputChange(event: Event): void {
