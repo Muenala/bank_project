@@ -1,0 +1,32 @@
+<div class="df-center">
+    <div class="card">
+        <h1 class="title2">Formulario de registro</h1>
+        <hr>
+        <form class="form" [formGroup]="form">
+            <div class="df-between">
+                <app-bp-input class="full-width" formControlName="id" placeholder="ID">
+                    <label bp-label>ID</label>
+                </app-bp-input>
+                <app-bp-input  class="full-width" formControlName="nombre" placeholder="Tarjeta Crédito">
+                    <label bp-label>Nombre</label>
+                </app-bp-input>
+            </div>
+            <div class="df-between">
+                <app-bp-input class="full-width" formControlName="descripcion" placeholder="Descripción">
+                    <label bp-label>Descripción</label>
+                </app-bp-input>
+                <app-bp-input  class="full-width" formControlName="logo" placeholder="Logo">
+                    <label bp-label>Logo</label>
+                </app-bp-input>
+            </div>
+            <div class="df-between">
+                <app-bp-input class="full-width" formControlName="fecha_liberacion" placeholder="Fecha Liberación">
+                    <label bp-label>Fecha Liberación</label>
+                </app-bp-input>
+                <app-bp-input  class="full-width" formControlName="fecha_revision" placeholder="Fecha Revisión">
+                    <label bp-label>Fecha Revisión</label>
+                </app-bp-input>
+            </div>
+        </form>
+    </div>
+</div>

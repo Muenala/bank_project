@@ -5,8 +5,9 @@
 @import 'card';
 @import 'select';
 @import 'general';
+@import 'button';
 
 .navigate {
     padding: 30px 70px;
-    background-color: $bp-secondary-darkGrayishBlue100;
+    background-color: $bp-gray-white;
 }

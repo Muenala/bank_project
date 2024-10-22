@@ -1,0 +1,18 @@
+<div class="bp-input-container" [class.is-invalid]="isInvalid">
+    {{labelRef}}
+    <label class="title">
+      <ng-content select="[bp-label]"></ng-content>
+    </label>
+    <input
+      [placeholder]="placeholder"
+      [value]="value"
+      [disabled]="isDisabled"
+      (input)="onInputChange($event)"
+      (blur)="onBlur()"
+    >
+    @if (isInvalid) {
+        <div class="error-message">
+          {{ errorMessage }}
+        </div>
+    }
+  </div>

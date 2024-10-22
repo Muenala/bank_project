@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-search',
@@ -11,8 +12,17 @@ import { FormsModule } from '@angular/forms';
 export class ProductSearchComponent {
   @Output() search = new EventEmitter<string>();
   searchTerm:string = '';
+  constructor(
+    private  router: Router
 
+  ){
+
+  }
   onSearch(term: string): void {
     this.search.emit(term);
+  }
+
+  addNewProduct(){
+    this.router.navigate(['/nuevo'])
   }
 }

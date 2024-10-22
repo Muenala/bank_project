@@ -12,3 +12,15 @@
 .full-width {
     width: 100%;
 }
+
+.app{
+    background-color:  $bp-gray-white;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.navigate {
+    padding: 30px 70px;
+    background-color: $bp-gray-white;
+}

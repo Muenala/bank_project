@@ -1,9 +1,76 @@
-*{
-    font-family: "prelo-book", sans-serif;
+$font-family-primary: "prelo-book", sans-serif;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+$font-size-base: 16px;
+$font-size-small: 0.875rem;
+$font-size-medium: 1rem; 
+$font-size-large: 1.25rem;
+$font-size-xlarge: 1.5rem;
+
+
+$line-height-tight: 1.2;
+$line-height-normal: 1.5;
+$line-height-loose: 1.8;
+
+$type-scale: (
+    -1: 0.75rem,
+    0: 1rem,
+    1: 1.333rem,
+    2: 1.777rem,
+    3: 2.369rem,
+    4: 3.157rem
+);
+
+@function type-scale($level) {
+    @return map-get($type-scale, $level);
+}
+
+@mixin font($size, $weight: $font-weight-regular, $line-height: $line-height-normal) {
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $line-height;
+}
+
+.title {
+    @include font(type-scale(0), $font-weight-bold);
+    margin-bottom: 1rem;
+}
+
+.title2 {
+    @include font(type-scale(3), $font-weight-bold);
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    @include font(type-scale(1), $font-weight-medium);
+    color: $bp-primary-blue;
+}
+
+.paragraph {
+    @include font($font-size-medium);
+    margin-bottom: 1rem;
 }
 
 
 .color-blue{
-    color: $bp-primary-blue500;
-    fill: $bp-primary-blue500;
+    color: $bp-primary-blue;
+}
+
+
+body {
+    font-family: $font-family-primary;
+}
+
+h1,
+h2,
+h3 {
+    font-family: $font-family-primary;
+}
+
+pre,
+label {
+    font-family: $font-family-primary;
 }

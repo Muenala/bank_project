@@ -1,0 +1,36 @@
+.bp-input-container {
+    margin: 5px 15px 5px 5px;
+    padding: 5px 15px 5px 5px;
+    position: relative;
+    margin-bottom: 1rem;
+  
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: #333;
+      margin-left: 5px;
+    }
+  
+    input {
+        width: 100%;
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+      }
+    }
+  
+    &.is-invalid {
+      input {
+        border-color: #dc3545;
+      }
+    }
+  
+    .error-message {
+      position: absolute;
+      bottom: -1.2rem;
+      left: 0;
+      font-size: 0.8rem;
+      color: #dc3545;
+    }
+  }
